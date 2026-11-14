@@ -27,3 +27,6 @@ terraform.rc
 .DS_Store
 Thumbs.db
 .vscode/
+
+# Python venv
+.venv/
