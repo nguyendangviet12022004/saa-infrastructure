@@ -1,0 +1,29 @@
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+tfplan
+*.tfplan
+crash.log
+crash.*.log
+*.tfvars
+*.tfvars.json
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+
+# Ansible
+*.retry
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
