@@ -8,6 +8,8 @@ crash.log
 crash.*.log
 *.tfvars
 *.tfvars.json
+*.pkrvars.hcl
+!packer/dev.auto.pkrvars.hcl
 override.tf
 override.tf.json
 *_override.tf
@@ -22,6 +24,10 @@ terraform.rc
 
 # Ansible
 *.retry
+ansible/.vault_pass
+ansible/**/.vault_pass
+ansible/vault-password-file
+ansible/**/vault-password-file
 
 # OS/editor files
 .DS_Store
@@ -30,3 +36,11 @@ Thumbs.db
 
 # Python venv
 .venv/
+
+# Vscode settings
+.vscode/settings.json
+*.code-workspace
+
+# ansible 
+ansible.cfg
+ansible/inventories/**

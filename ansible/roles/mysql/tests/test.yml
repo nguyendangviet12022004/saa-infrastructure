@@ -1,0 +1,6 @@
+---
+- name: Test MySQL role
+  hosts: localhost
+  connection: local
+  roles:
+    - mysql

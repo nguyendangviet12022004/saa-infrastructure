@@ -1,0 +1,6 @@
+---
+- name: Test Nginx role
+  hosts: localhost
+  connection: local
+  roles:
+    - nginx
