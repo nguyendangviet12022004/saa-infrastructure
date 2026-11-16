@@ -9,3 +9,30 @@
     owner: "{{ ansible_user | default(ansible_user_id) }}"
     group: "{{ ansible_user | default(ansible_user_id) }}"
     mode: "0600"
+
+- name: Create local kubeconfig directory
+  ansible.builtin.file:
+    path: "{{ master_node_local_kubeconfig | dirname }}"
+    state: directory
+    mode: "0700"
+  delegate_to: localhost
+  become: false
+
+- name: Download the control-plane kubeconfig
+  ansible.builtin.fetch:
+    src: "{{ master_node_kubeadm_admin_config }}"
+    dest: "{{ master_node_local_kubeconfig }}"
+    flat: true
+    fail_on_missing: true
+  become: true
+
+- name: Generate worker join command
+  ansible.builtin.command:
+    cmd: kubeadm token create --print-join-command
+  register: master_node_join_command_result
+  changed_when: false
+
+- name: Share worker join command with subsequent plays
+  ansible.builtin.set_fact:
+    master_node_kubeadm_join_command: "{{ master_node_join_command_result.stdout }}"
+    cacheable: true

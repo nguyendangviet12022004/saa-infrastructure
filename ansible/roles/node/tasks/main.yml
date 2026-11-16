@@ -15,6 +15,13 @@
     regexp: '^(\s*[^#].*\s+swap\s+.*)$'
     replace: '# \1'
 
+- name: Force apt to use IPv4 when IPv6 is unavailable
+  ansible.builtin.template:
+    src: 99force-ipv4.j2
+    dest: /etc/apt/apt.conf.d/99force-ipv4
+    mode: "0644"
+  when: node_apt_force_ipv4 | bool
+
 - name: Install container runtime and repository prerequisites
   ansible.builtin.apt:
     name:
@@ -46,6 +53,12 @@
     state: present
     reload: true
   loop: "{{ node_runtime_sysctls | dict2items }}"
+
+- name: Create containerd configuration directory
+  ansible.builtin.file:
+    path: "{{ node_containerd_config_path | dirname }}"
+    state: directory
+    mode: "0755"
 
 - name: Generate default containerd configuration
   ansible.builtin.command:

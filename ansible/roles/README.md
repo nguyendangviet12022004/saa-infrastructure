@@ -131,9 +131,11 @@ On the control-plane host, generate the worker join command:
 sudo kubeadm token create --print-join-command
 ```
 
-Paste the full output into `worker_node_kubeadm_join_command` under
-`worker_node.vars` in `ansible/inventories/dev/hosts.yml`. It has this form;
-use the real token and CA hash printed by kubeadm:
+The playbook now generates and passes this command from the master to the
+worker play automatically. To override it manually, set
+`worker_node_kubeadm_join_command` under `worker_node.vars` in
+`ansible/inventories/dev/hosts.yml`. It has this form; use the real token and
+CA hash printed by kubeadm:
 
 ```yaml
 worker_node_kubeadm_join_command: "kubeadm join MASTER_PRIVATE_IP:6443 --token TOKEN --discovery-token-ca-cert-hash sha256:CA_HASH"

@@ -32,7 +32,6 @@ module "network" {
     }
   })
 }
-
 module "compute" {
   source = "../../modules/compute"
 
@@ -48,3 +47,4 @@ module "compute" {
     Environment = var.environment
   }
 }
+

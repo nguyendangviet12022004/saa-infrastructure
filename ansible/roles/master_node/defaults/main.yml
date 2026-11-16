@@ -1,2 +1,8 @@
-master_node_kubeadm_init_extra_args: "--pod-network-cidr=10.244.0.0/16"
+master_node_api_server_cert_extra_sans:
+  - "54.255.248.12"
+master_node_kubeadm_init_extra_args: >-
+  --pod-network-cidr=10.244.0.0/16
+  {% for san in master_node_api_server_cert_extra_sans %}--apiserver-cert-extra-sans={{ san }} {% endfor %}
 master_node_kubeadm_admin_config: /etc/kubernetes/admin.conf
+master_node_local_kubeconfig: "{{ playbook_dir }}/../../.kube/config"
+master_node_kubeadm_join_command: ""

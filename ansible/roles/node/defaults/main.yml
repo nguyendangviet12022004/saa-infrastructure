@@ -5,6 +5,7 @@ node_kubernetes_packages:
   - kubectl
 node_containerd_package: containerd
 node_containerd_config_path: /etc/containerd/config.toml
+node_apt_force_ipv4: true
 node_runtime_modules:
   - overlay
   - br_netfilter

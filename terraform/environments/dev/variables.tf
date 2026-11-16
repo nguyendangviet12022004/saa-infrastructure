@@ -2,7 +2,6 @@ variable "project" {
   description = "Project name used in network resource names."
   type        = string
 }
-
 variable "environment" {
   description = "Environment name used in network resource names."
   type        = string
@@ -88,11 +87,12 @@ variable "ami_id" {
 variable "ssh_cidrs" {
   description = "CIDRs permitted to SSH to the Kubernetes nodes. Empty disables SSH ingress."
   type        = list(string)
-  default     = []
+  default     = ["0.0.0.0/0"]
 }
 
 variable "api_cidrs" {
   description = "CIDRs permitted to connect to the Kubernetes API on port 6443. Empty disables external API access."
   type        = list(string)
-  default     = []
+  default     = ["0.0.0.0/0"]
 }
+

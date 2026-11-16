@@ -37,4 +37,9 @@ locals {
       ]
     ]) : rule.key => rule
   }
+
+  default_egress_security_groups = {
+    for security_group_key, security_group in var.security_groups : security_group_key => security_group
+    if length(security_group.egress) == 0
+  }
 }

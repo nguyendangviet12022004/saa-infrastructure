@@ -24,6 +24,7 @@ terraform.rc
 
 # Ansible
 *.retry
+.kube/
 ansible/.vault_pass
 ansible/**/.vault_pass
 ansible/vault-password-file
@@ -44,3 +45,4 @@ Thumbs.db
 # ansible 
 ansible.cfg
 ansible/inventories/**
+.ansible
