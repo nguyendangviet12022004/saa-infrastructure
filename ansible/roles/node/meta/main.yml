@@ -1,0 +1,7 @@
+galaxy_info:
+  role_name: node
+  author: infrastructure
+  description: Prepare an Ubuntu host as a Kubernetes node with containerd and kubeadm.
+  license: MIT
+  min_ansible_version: "2.14"
+dependencies: []

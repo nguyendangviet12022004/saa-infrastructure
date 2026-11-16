@@ -16,3 +16,11 @@ Use the staging or production inventory as appropriate. The root
 playbook resolve when invoked from the repository root. The playbook applies
 all three roles to every host in the selected inventory. Keep credentials out
 of plaintext inventory files; use Ansible Vault for sensitive variables.
+
+The Kubernetes node role uses `ansible.posix.sysctl`. Install its collection
+before running the Kubernetes playbook:
+
+```sh
+ansible-galaxy collection install -r ansible/requirements.yml
+ansible-playbook ansible/playbooks/kubernetes.yml
+```

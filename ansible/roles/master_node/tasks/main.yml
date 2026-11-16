@@ -1,0 +1,11 @@
+- name: Initialize the Kubernetes control plane
+  ansible.builtin.command:
+    cmd: "kubeadm init {{ master_node_kubeadm_init_extra_args }}"
+    creates: "{{ master_node_kubeadm_admin_config }}"
+
+- name: Ensure admin kubeconfig is readable by the ansible user
+  ansible.builtin.file:
+    path: "{{ master_node_kubeadm_admin_config }}"
+    owner: "{{ ansible_user | default(ansible_user_id) }}"
+    group: "{{ ansible_user | default(ansible_user_id) }}"
+    mode: "0600"

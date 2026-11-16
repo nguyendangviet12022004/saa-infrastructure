@@ -1,0 +1,14 @@
+node_kubernetes_minor_version: "1.37"
+node_kubernetes_packages:
+  - kubelet
+  - kubeadm
+  - kubectl
+node_containerd_package: containerd
+node_containerd_config_path: /etc/containerd/config.toml
+node_runtime_modules:
+  - overlay
+  - br_netfilter
+node_runtime_sysctls:
+  net.bridge.bridge-nf-call-iptables: "1"
+  net.bridge.bridge-nf-call-ip6tables: "1"
+  net.ipv4.ip_forward: "1"

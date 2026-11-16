@@ -48,3 +48,51 @@ variable "security_groups" {
   }))
   default = {}
 }
+
+variable "nodes" {
+  description = "Kubernetes EC2 nodes keyed by node name."
+  type = map(object({
+    role                        = string
+    instance_type               = optional(string, "t3.medium")
+    subnet_id                   = optional(string)
+    associate_public_ip_address = optional(bool, true)
+    root_volume_size            = optional(number, 30)
+    user_data                   = optional(string)
+    tags                        = optional(map(string), {})
+  }))
+  default = {
+    master-1 = { role = "master_node" }
+    worker-1 = { role = "worker_node" }
+    worker-2 = { role = "worker_node" }
+  }
+}
+
+variable "node_subnet_ids" {
+  description = "Subnet IDs used by nodes without a per-node subnet_id. Defaults to public subnet IDs."
+  type        = list(string)
+  default     = null
+}
+
+variable "key_name" {
+  description = "Optional EC2 key pair name attached to Kubernetes nodes."
+  type        = string
+  default     = null
+}
+
+variable "ami_id" {
+  description = "Optional AMI override. Defaults to the latest Ubuntu 24.04 LTS amd64 image."
+  type        = string
+  default     = null
+}
+
+variable "ssh_cidrs" {
+  description = "CIDRs permitted to SSH to the Kubernetes nodes. Empty disables SSH ingress."
+  type        = list(string)
+  default     = []
+}
+
+variable "api_cidrs" {
+  description = "CIDRs permitted to connect to the Kubernetes API on port 6443. Empty disables external API access."
+  type        = list(string)
+  default     = []
+}

@@ -1,0 +1,2 @@
+master_node_kubeadm_init_extra_args: "--pod-network-cidr=10.244.0.0/16"
+master_node_kubeadm_admin_config: /etc/kubernetes/admin.conf

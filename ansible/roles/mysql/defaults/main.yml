@@ -1,4 +1,0 @@
----
-mysql_packages:
-  - mysql-server
-mysql_service_name: mysql

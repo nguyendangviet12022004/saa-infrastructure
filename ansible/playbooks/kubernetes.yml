@@ -1,0 +1,11 @@
+- name: Prepare and initialize Kubernetes control plane
+  hosts: master_node
+  become: true
+  roles:
+    - master_node
+
+- name: Prepare and join Kubernetes workers
+  hosts: worker_node
+  become: true
+  roles:
+    - worker_node
