@@ -6,3 +6,5 @@ master_node_kubeadm_init_extra_args: >-
 master_node_kubeadm_admin_config: /etc/kubernetes/admin.conf
 master_node_local_kubeconfig: "{{ playbook_dir }}/../../.kube/config"
 master_node_kubeadm_join_command: ""
+master_node_calico_version: "3.33.0"
+master_node_calico_install: true

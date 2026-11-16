@@ -10,6 +10,36 @@
     group: "{{ ansible_user | default(ansible_user_id) }}"
     mode: "0600"
 
+- name: Install Calico CRDs
+  ansible.builtin.command:
+    cmd: >-
+      kubectl apply -f
+      https://raw.githubusercontent.com/projectcalico/calico/v{{ master_node_calico_version }}/manifests/v3_projectcalico_org.yaml
+  environment:
+    KUBECONFIG: "{{ master_node_kubeadm_admin_config }}"
+  when: master_node_calico_install | bool
+  changed_when: false
+
+- name: Install the Tigera operator
+  ansible.builtin.command:
+    cmd: >-
+      kubectl apply -f
+      https://raw.githubusercontent.com/projectcalico/calico/v{{ master_node_calico_version }}/manifests/tigera-operator.yaml
+  environment:
+    KUBECONFIG: "{{ master_node_kubeadm_admin_config }}"
+  when: master_node_calico_install | bool
+  changed_when: false
+
+- name: Install Calico custom resources
+  ansible.builtin.command:
+    cmd: >-
+      kubectl apply -f
+      https://raw.githubusercontent.com/projectcalico/calico/v{{ master_node_calico_version }}/manifests/custom-resources.yaml
+  environment:
+    KUBECONFIG: "{{ master_node_kubeadm_admin_config }}"
+  when: master_node_calico_install | bool
+  changed_when: false
+
 - name: Create local kubeconfig directory
   ansible.builtin.file:
     path: "{{ master_node_local_kubeconfig | dirname }}"

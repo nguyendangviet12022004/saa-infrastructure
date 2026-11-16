@@ -14,6 +14,11 @@ The role now runs that command automatically and shares it with the
 `worker_node` play. You normally do not need to copy the join command into the
 inventory manually.
 
+By default, the role installs Calico through the Tigera operator after
+`kubeadm init`. Override `master_node_calico_version` to select another tested
+Calico release, or set `master_node_calico_install: false` to install Calico
+separately.
+
 Use the downloaded configuration from the repository root:
 
 ```sh
