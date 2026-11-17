@@ -1,5 +1,5 @@
 master_node_api_server_cert_extra_sans:
-  - "54.255.248.12"
+  - "13.229.235.226"
 master_node_kubeadm_init_extra_args: >-
   --pod-network-cidr=10.244.0.0/16
   {% for san in master_node_api_server_cert_extra_sans %}--apiserver-cert-extra-sans={{ san }} {% endfor %}
@@ -8,3 +8,4 @@ master_node_local_kubeconfig: "{{ playbook_dir }}/../../.kube/config"
 master_node_kubeadm_join_command: ""
 master_node_calico_version: "3.33.0"
 master_node_calico_install: true
+master_node_calico_pod_cidr: "10.244.0.0/16"
